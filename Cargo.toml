@@ -10,7 +10,7 @@ criterion = "0.5"
 rand = "0.10.0"
 
 [[bench]]
-name = "baseline"
+name = "criterion"
 harness = false
 
 [profile.release]
