@@ -32,6 +32,11 @@ fn normalize_simple() {
 }
 
 #[test]
+fn normalize_complex() {
+    assert_eq!(normalize("    Hello\n \tWorld"), "helloworld");
+}
+
+#[test]
 fn averages_only_positive() {
     let nums = [-5, 5, 15];
     // Ожидается (5 + 15) / 2 = 10, но текущая реализация делит на все элементы.

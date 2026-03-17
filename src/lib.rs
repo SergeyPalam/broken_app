@@ -15,10 +15,21 @@ pub fn leak_buffer(input: &[u8]) -> usize {
     input.iter().filter(|item| **item != 0).count()
 }
 
-/// Небрежная нормализация строки: удаляем пробелы и приводим к нижнему регистру,
-/// но игнорируем повторяющиеся пробелы/табуляции внутри текста.
 pub fn normalize(input: &str) -> String {
-    input.replace(' ', "").to_lowercase()
+    let mut res = String::new();
+
+    for symb in input.chars(){
+        if symb.is_whitespace() {
+            continue;
+        }
+
+        let mut append = String::new();
+        for inner in symb.to_lowercase() {
+            append.push(inner);
+        }
+        res.push_str(&append);
+    }
+    res
 }
 
 pub fn average_positive(values: &[i64]) -> f64 {
