@@ -1,0 +1,6 @@
+   Compiling broken-app v0.1.0 (/home/sergey/broken_app)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.38s
+     Running unittests src/lib.rs (target/miri/x86_64-unknown-linux-gnu/debug/deps/broken_app-0aa8671ae24ebd65)
+     Running unittests src/bin/demo.rs (target/miri/x86_64-unknown-linux-gnu/debug/deps/demo-63fc200533ce6f8d)
+     Running tests/integration.rs (target/miri/x86_64-unknown-linux-gnu/debug/deps/integration-70fcb2a34bf99a9f)
+error: test failed, to rerun pass `--test integration`
