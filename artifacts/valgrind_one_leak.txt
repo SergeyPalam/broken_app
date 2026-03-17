@@ -1,0 +1,54 @@
+==94166== Memcheck, a memory error detector
+==94166== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==94166== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==94166== Command: ./target/debug/deps/integration-c41018100d22e006
+==94166== 
+==94166== 
+==94166== HEAP SUMMARY:
+==94166==     in use at exit: 736 bytes in 4 blocks
+==94166==   total heap usage: 948 allocs, 944 frees, 2,502,749 bytes allocated
+==94166== 
+==94166== 48 bytes in 1 blocks are possibly lost in loss record 2 of 4
+==94166==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==94166==    by 0x1AB8BB: alloc (unix.rs:14)
+==94166==    by 0x1AB8BB: alloc_impl (alloc.rs:151)
+==94166==    by 0x1AB8BB: allocate (alloc.rs:214)
+==94166==    by 0x1AB8BB: {closure#0}<std::thread::thread::Inner, std::alloc::System> (sync.rs:805)
+==94166==    by 0x1AB8BB: allocate_for_layout<core::mem::maybe_uninit::MaybeUninit<std::thread::thread::Inner>, alloc::sync::{impl#17}::new_uninit_in::{closure_env#0}<std::thread::thread::Inner, std::alloc::System>, fn(*mut u8) -> *mut alloc::sync::ArcInner<core::mem::maybe_uninit::MaybeUninit<std::thread::thread::Inner>>> (sync.rs:2162)
+==94166==    by 0x1AB8BB: new_uninit_in<std::thread::thread::Inner, std::alloc::System> (sync.rs:803)
+==94166==    by 0x1AB8BB: std::thread::thread::Thread::new (thread.rs:102)
+==94166==    by 0x1ABB2F: std::thread::current::init_current (current.rs:294)
+==94166==    by 0x1AACD5: current_or_unnamed (current.rs:251)
+==94166==    by 0x1AACD5: std::sync::mpmc::context::Context::new (context.rs:72)
+==94166==    by 0x1530AA: __rust_std_internal_init_fn (context.rs:43)
+==94166==    by 0x1530AA: call_once<fn() -> core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>, ()> (function.rs:250)
+==94166==    by 0x1530AA: unwrap_or_else<core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>, fn() -> core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>> (option.rs:1067)
+==94166==    by 0x1530AA: std::sys::thread_local::native::lazy::Storage<T,D>::get_or_init_slow (lazy.rs:80)
+==94166==    by 0x1547B2: get_or_init<core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>, (), fn() -> core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>> (lazy.rs:62)
+==94166==    by 0x1547B2: {closure#0} (mod.rs:97)
+==94166==    by 0x1547B2: call_once<std::sync::mpmc::context::{impl#0}::with::CONTEXT::{constant#0}::{closure_env#0}, (core::option::Option<&mut core::option::Option<core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>>>)> (function.rs:250)
+==94166==    by 0x1547B2: try_with<core::cell::Cell<core::option::Option<std::sync::mpmc::context::Context>>, std::sync::mpmc::context::{impl#0}::with::{closure_env#1}<std::sync::mpmc::list::{impl#3}::recv::{closure_env#1}<test::event::CompletedTest>, ()>, ()> (local.rs:512)
+==94166==    by 0x1547B2: with<std::sync::mpmc::list::{impl#3}::recv::{closure_env#1}<test::event::CompletedTest>, ()> (context.rs:53)
+==94166==    by 0x1547B2: std::sync::mpmc::list::Channel<T>::recv (list.rs:442)
+==94166==    by 0x1718E0: recv_deadline<test::event::CompletedTest> (mod.rs:1119)
+==94166==    by 0x1718E0: recv_timeout<test::event::CompletedTest> (mod.rs:1051)
+==94166==    by 0x1718E0: recv_timeout<test::event::CompletedTest> (mpsc.rs:909)
+==94166==    by 0x1718E0: run_tests<test::console::run_tests_console::{closure_env#2}> (lib.rs:456)
+==94166==    by 0x1718E0: test::console::run_tests_console (console.rs:327)
+==94166==    by 0x17A298: test_main_with_exit_callback<test::test_main::{closure_env#0}> (lib.rs:160)
+==94166==    by 0x17A298: test::test_main (lib.rs:101)
+==94166==    by 0x16521A: test::test_main_static (lib.rs:183)
+==94166==    by 0x145CB2: integration::main (integration.rs:0)
+==94166==    by 0x144EAA: core::ops::function::FnOnce::call_once (function.rs:250)
+==94166==    by 0x1466ED: std::sys::backtrace::__rust_begin_short_backtrace (backtrace.rs:160)
+==94166== 
+==94166== LEAK SUMMARY:
+==94166==    definitely lost: 0 bytes in 0 blocks
+==94166==    indirectly lost: 0 bytes in 0 blocks
+==94166==      possibly lost: 48 bytes in 1 blocks
+==94166==    still reachable: 688 bytes in 3 blocks
+==94166==         suppressed: 0 bytes in 0 blocks
+==94166== Reachable blocks (those to which a pointer was found) are not shown.
+==94166== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==94166== 
+==94166== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

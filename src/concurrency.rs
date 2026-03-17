@@ -5,7 +5,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 static COUNTER: AtomicU64 = AtomicU64::new(0);
 
 pub fn race_increment(iterations: usize, threads: usize) -> u64 {
-    let mut handles = Vec::new();
+    let mut handles = Vec::with_capacity(iterations);
     for _ in 0..threads {
         handles.push(thread::spawn(move || {
             for _ in 0..iterations {
