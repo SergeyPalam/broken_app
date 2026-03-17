@@ -21,12 +21,14 @@ pub fn normalize(input: &str) -> String {
     input.replace(' ', "").to_lowercase()
 }
 
-/// Логическая ошибка: усредняет по всем элементам, хотя требуется учитывать
-/// только положительные. Деление на длину среза даёт неверный результат.
 pub fn average_positive(values: &[i64]) -> f64 {
-    let sum: i64 = values.iter().sum();
-    if values.is_empty() {
-        return 0.0;
+    let mut sum = 0;
+    let mut count = 0i64;
+    for val in values {
+        if *val > 0 {
+            sum += val;
+            count += 1;
+        }
     }
-    sum as f64 / values.len() as f64
+    sum as f64 / count as f64
 }
