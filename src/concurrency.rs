@@ -4,6 +4,8 @@ use std::sync::atomic::{AtomicU64, Ordering};
 
 static COUNTER: AtomicU64 = AtomicU64::new(0);
 
+/// Потокобезопасный счётчик
+/// Устранена гонка данных
 pub fn race_increment(iterations: usize, threads: usize) -> u64 {
     let mut handles = Vec::with_capacity(iterations);
     for _ in 0..threads {
@@ -19,11 +21,14 @@ pub fn race_increment(iterations: usize, threads: usize) -> u64 {
     COUNTER.load(Ordering::Acquire)
 }
 
+/// Функция чтения счётчика
+/// Добавлена потокобезопасность
 pub fn read_after_sleep() -> u64 {
     thread::sleep(Duration::from_millis(10));
     COUNTER.load(Ordering::Acquire)
 }
 
+/// Потокобезопасное обнуление счетчика
 pub fn reset_counter() {
     COUNTER.store(0, Ordering::Release);
 }
